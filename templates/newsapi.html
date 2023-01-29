@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link href="{% static 'newsapi.css' %}" rel="stylesheet">
+{% endblock head %}
+
+{% block title %}
+スポーツニュース
+{% endblock title %}
+
+{% block content %}
+  <div class="container mb-5">
+      <h3 class="mb-5 text-danger">
+        {{ error_message }}
+      </h3>
+      <form method="post" class="d-flex">{% csrf_token %}
+          {{ form.keyword }}
+          <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i><span>検索</span></button>
+      </form>
+  </div>
+  <div id="articles_container" class="container">
+    {% if articles %}
+      {% for article in articles %}
+        <div class="article-container">
+            <a href="{{ article.url }}" class="thumbnail-box">
+                <img src="{{ article.image_url }}" class="thumbnail">
+            </a>
+            <div class="detail-box">
+                <a href="{{ article.url }}" class="article-url-box">
+                  <h3 class="article-title">{{ article.title }}</h3>
+                  <h5 class="text-dark">{{ article.description | truncatechars:100 }}</h5>
+                  <h6 class="text-secondary">{{ article.published_at }}</h6>
+                </a>
+            </div>
+        </div>
+      {% endfor %}
+    {% elif keyword and error_message is None %}
+      <h1>「{{ keyword }}」に一致する記事は見つかりませんでした。</h1>
+    {% endif %}
+  </div>
+{% endblock content %}

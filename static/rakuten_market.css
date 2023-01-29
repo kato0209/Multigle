@@ -1,0 +1,112 @@
+.btn-rakuten-market{
+    background-color: #bf0000;
+    color: white;
+}
+.btn-rakuten-market:hover{
+    background-color: #bf0000;
+    color: white;
+    filter: brightness(90%);
+}
+#items_container{
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 3rem;
+}
+.item-container{
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid #d3d3d3;
+}
+.item-container:hover{
+    background-color: #f5f5f5;
+}
+.item-container:active{
+    background-color: #f5f5f5;
+}
+.item-container a{
+    text-decoration: none;
+}
+.item-container a:hover{
+    text-decoration: underline;
+}
+.star-rating{
+    position: relative;
+}
+.star-rating-gray {
+    color: #ccc;
+}
+.star-rating-yellow{
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #ffcf32;
+}
+.thumbnail-box{
+    position: relative;
+    width: 100%;
+    height: 45%;
+    overflow: hidden;
+    padding-top: 100%;
+}
+.thumbnail{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.thumbnail:hover{
+    opacity: 0.8;
+}
+.item-name{
+    height: 25%;
+}
+.item-price{
+    color: red;
+    height: 15%;
+}
+.item-price span{
+    font-size: 2rem;
+}
+.item-rating-box{
+    height: 10%;
+    display: flex;
+    margin-bottom: 0.1rem;
+}
+.item-rating-box span{
+    margin-left: 0.3rem;
+}
+.shop-url{
+    height: 5%;
+}
+.shop-url{
+    color: gray;
+}
+.shop-url:hover{
+    color: #0d6efd;
+}
+.review-average{
+    color: #ffcf32;
+}
+.review-average-0{
+    color: gray;
+}
+
+@media(max-width: 575px){
+    .item-container{
+        width: 33%;
+    }
+}
+
+@media(max-width: 400px){
+    .item-container{
+        width: 50%;
+    }
+}

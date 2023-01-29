@@ -1,0 +1,82 @@
+.title{
+    font-size: 5.0rem;
+}
+.btn-row{
+    display: flex;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3em;
+}
+.btn{
+    color: white;
+    font-size: 1.5rem;
+    width: 33%;
+}
+.btn:hover{
+    color: white;
+    opacity: 0.8;
+}
+.center-button{
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+}
+.yellow-green{
+    color: white;
+    background-color: #00FF00;
+}
+.yellow-green:hover{
+    color: white;
+    background-color: #00FF00;
+    opacity: 0.7;
+}
+.youtube-red{
+    background-color: #DA1725;
+    color: white;
+}
+.youtube-red:hover{
+    background-color: #DA1725;
+    color: white;
+    opacity: 0.7;
+}
+.hotpepper-red{
+    background-color: #CC0000;
+    color: white;
+}
+.hotpepper-red:hover{
+    background-color: #CC0000;
+    color: white;
+    opacity: 0.7;
+}
+.twitter-blue{
+    color: #fff;
+    background-color: #55acee;
+}
+.btn-instagram{
+    background: linear-gradient(45deg, rgba(254,212,117,1) 0%,rgba(229,61,93,1) 50%,rgba(194,49,134,1) 70%,rgba(156,56,187,1) 100%);
+    color: #fff;
+    border: none;
+}
+.rakuten-travel-green{
+    background-color: #45be35;
+    color: white;
+}
+.rakuten-travel-green:hover{
+    background-color: #45be35;
+    color: white;
+    opacity: 0.7;
+}
+.rakuten-market-red{
+    background-color: #bf0000;
+    color: white;
+}
+.rakuten-market-red:hover{
+    background-color: #bf0000;
+    color: white;
+    opacity: 0.7;
+}
+@media(max-width: 575px){
+    .btn{
+        font-size: 1rem;
+    }
+}

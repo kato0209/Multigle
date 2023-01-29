@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link href="{% static 'rakuten_market.css' %}" rel="stylesheet">
+{% endblock head %}
+
+{% block title %}
+楽天市場検索
+{% endblock title %}
+
+{% block content %}
+  <div class="container mb-5">
+      <h3 class="mb-5 text-danger">
+        {{ error_message }}
+      </h3>
+      <form method="post" class="d-flex">{% csrf_token %}
+          {{ form.keyword }}
+          <button class="btn btn-rakuten-market" type="submit"><i class="fas fa-search"></i><span>検索</span></button>
+      </form>
+  </div>
+  <div id="items_container" class="container">
+    {% if items %}
+      {% for item in items %}
+        <div class="item-container">
+            <a href="{{ item.item_url }}" class="thumbnail-box">
+                <img src="{{ item.thumbnail_url }}" class="thumbnail">
+            </a>
+            <a href="{{ item.item_url }}" class="item-name">{{ item.item_name | truncatechars:50 }}</a>
+            <p class="item-price"><span>{{ item.item_price }}</span> 円</p>
+            <div class="item-rating-box">
+                <div class="star-rating">
+                  <div class="star-rating-yellow" data-rating="{{ item.review_rating }}">★★★★★</div>
+                  <div class="star-rating-gray">★★★★★</div>
+                </div>
+                {% if item.review_average == 0 %}
+                    <span class="review-average-0">{{ item.review_average }}</span>
+                {% else %}                
+                    <span class="review-average">{{ item.review_average }}</span>
+                {% endif %}
+                <span>({{ item.review_count }}件)</span>
+            </div>
+            <a href="{{ item.shop_url }}" class="shop-url">{{ item.shop_name }}</a>
+        </div>
+      {% endfor %}
+    {% elif keyword and error_message is None %}
+      <h1>「{{ keyword }}」に一致する記事は見つかりませんでした。</h1>
+    {% endif %}
+  </div>
+{% endblock content %}
+
+{% block footer %}
+<script type="text/javascript">
+  window.onload = function(){
+    star_rating_list = document.getElementsByClassName('star-rating-yellow')
+    for(let star_rating of star_rating_list){
+      star_rating.style.width = star_rating.dataset.rating + '%'
+    }
+  }
+</script>
+{% endblock footer %}

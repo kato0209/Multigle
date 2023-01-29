@@ -1,0 +1,46 @@
+.btn-yellow-green{
+    color: white;
+    background-color: #00FF00;
+}
+.btn-yellow-green:hover{
+    color: white;
+    background-color: #00FF00;
+    filter: brightness(90%);
+}
+.post-container{
+    border-bottom: 1px solid gray;
+    width: 90%;
+    margin-bottom: 2rem;
+}
+.user-icon{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 100%;
+}
+.user-url{
+    color: gray;
+    text-decoration: none;
+}
+.user-url:hover{
+    color: gray;
+    text-decoration: underline;
+}
+.post-title{
+    color: #00FF00;
+    text-decoration: none;
+}
+.post-title:hover{
+    color: #00FF00;
+    text-decoration: underline;
+}
+.post-tag{
+    color: black;
+    text-decoration: none;
+}
+.post-tag:hover{
+    color: black;
+    text-decoration: underline;
+}
+.flex-grow{
+    flex-grow: 1;
+}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link href="{% static 'hotpepper.css' %}" rel="stylesheet">
+{% endblock head %}
+
+{% block title %}
+HOTPEPPERグルメ検索
+{% endblock title %}
+
+{% block content %}
+  <div class="container mb-5">
+      <h3 class="mb-5 text-danger">
+        {{ error_message }}
+      </h3>
+      <form method="post" class="d-flex">{% csrf_token %}
+          {{ form.keyword }}
+          <button class="btn btn-hotpepper" type="submit"><i class="fas fa-search"></i><span>検索</span></button>
+      </form>
+  </div>
+  <div id="shops_container" class="container">
+    {% if shops %}
+      {% for shop in shops %}
+        <div class="shop-container-wrap">
+          <div class="shop-container">
+            <a href="{{ shop.site_url }}" class="thumbnail-box">
+              <img src="{{ shop.photo_url }}" class="thumbnail">
+            </a>
+            <div class="detail-box">
+              <p><b>{{ shop.genre_name }} | {{ shop.station_name }}</b></p>
+              <h3><a href="{{ shop.site_url }}">{{ shop.name }}</a></h3>
+              <h5 class="mb-3">{{ shop.catch }}</h5>
+              <p><i class="fas fa-wallet"></i> <span>{{ shop.budget }}</span></p>
+              <p><i class="fas fa-map-marker-alt"></i> <span>{{ shop.address }}</span></p>
+              <p><i class="fas fa-subway"></i> <span>{{ shop.access }}</span></p>
+              <h5>open : {{ shop.open }}</h5>
+              <h5>close : {{ shop.close }}</h5>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% elif keyword and error_message is None %}
+      <h1>「{{ keyword }}」に一致する記事は見つかりませんでした。</h1>
+    {% endif %}
+  </div>
+{% endblock content %}

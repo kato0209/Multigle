@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link href="{% static 'rakuten_travel.css' %}" rel="stylesheet">
+{% endblock head %}
+
+{% block title %}
+楽天トラベル検索
+{% endblock title %}
+
+{% block content %}
+  <div class="container mb-5">
+      <h3 class="mb-5 text-danger">
+        {{ error_message }}
+      </h3>
+      <form method="post" class="d-flex">{% csrf_token %}
+          {{ form.keyword }}
+          <button class="btn btn-rakuten-travel" type="submit"><i class="fas fa-search"></i><span>検索</span></button>
+      </form>
+  </div>
+  <div id="hotels_container" class="container">
+    {% if hotels %}
+      {% for hotel in hotels %}
+        <div class="hotel-container">
+          <h2><a href="{{ hotel.hotel_info_url }}">{{ hotel.hotel_name }}</a></h2>
+          <div class="d-flex">
+            <div class="review-box">
+              <div class="hotel-rating-box">
+                <span>総合</span>
+                <div class="star-rating">
+                  <div class="star-rating-yellow" data-rating="{{ hotel.review_rating }}">★★★★★</div>
+                  <div class="star-rating-gray">★★★★★</div>
+                </div>
+              </div>
+              <a href="{{ hotel.review_url }}">お客様の声 ({{ hotel.review_count }}件)</a>
+            </div>
+            <p class="charge-box">
+              <span>[最安料金（目安）]</span>
+              <span class="charge">{{ hotel.hotel_min_charge }}円～</span>
+            </p>
+          </div>
+          <div class="main-box">
+            <a href="{{ hotel.hotel_info_url }}" class="thumbnail-box">
+              <img src="{{ hotel.hotel_thumbnail_url }}" class="thumbnail">
+            </a>
+            <div class="text-box ms-4">
+              <p class="text-success">{{ hotel.area_name }}</p>
+              <h4>{{ hotel.hotel_special }}</h4>
+            </div>
+          </div>
+          {% if hotel.hotel_other_info is not None %}
+            <div class="other-info mt-2">
+              <span>[その他設備・サービス]</span>
+              <div>{{ hotel.hotel_other_info }}</div>
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% elif keyword and error_message is None %}
+      <h1>「{{ keyword }}」に一致する記事は見つかりませんでした。</h1>
+    {% endif %}
+  </div>
+{% endblock content %}
+
+{% block footer %}
+<script type="text/javascript">
+  window.onload = function(){
+    star_rating_list = document.getElementsByClassName('star-rating-yellow')
+    for(let star_rating of star_rating_list){
+      star_rating.style.width = star_rating.dataset.rating + '%'
+    }
+  }
+</script>
+{% endblock footer %}

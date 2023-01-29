@@ -1,0 +1,100 @@
+.btn-rakuten-travel{
+    background-color: #45be35;
+    color: white;
+}
+.btn-rakuten-travel:hover{
+    background-color: #45be35;
+    color: white;
+    filter: brightness(90%);
+}
+#hotels_container{
+    width: 80%;
+    font-size: 1.2rem;
+    padding-bottom: 4rem;
+}
+#hotels_container a{
+    text-decoration: none;
+}
+#hotels_container a:hover{
+    text-decoration: underline;
+}
+.hotel-container{
+    margin-bottom: 2rem;
+    border-bottom: 1px solid gray;
+    padding-bottom: 2rem;
+}
+.review-box{
+    margin-right: auto;
+}
+.hotel-rating-box{
+    display: flex;
+}
+.hotel-rating-box span{
+    background-color: #FFA500;
+    color: white;
+    padding: 0px 2px;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 10%;
+}
+.star-rating{
+    position: relative;
+}
+.star-rating-gray {
+    color: #ccc;
+}
+.star-rating-yellow{
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #ffcf32;
+}
+.charge-box{
+    display: flex;
+    flex-direction: column;
+    margin-right: 4rem;
+}
+.charge{
+    color: red;
+    font-size: 1.8rem;
+}
+.main-box{
+    display: flex;
+}
+.other-info span{
+    color: gray;
+}
+.thumbnail-box{
+    position: relative;
+    width: 20%;
+    overflow: hidden;
+    padding-top: 15%;
+}
+.thumbnail{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.text-box{
+    width: 70%;
+}
+@media(max-width: 575px){
+    #hotels_container{
+        width: 95%;
+    }
+    .thumbnail-box{
+        width: 30%;
+        padding-top: 10%;
+    }
+    .text-box h4{
+        font-size: 1.1rem;
+    }
+    .charge-box{
+        margin-right: 0;
+    }
+}

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load extra_tags %}
+{% load static %}
+
+{% block head %}
+<link href="{% static 'instagram.css' %}" rel="stylesheet">
+{% endblock head %}
+
+{% block title %}
+Instagram検索
+{% endblock title %}
+
+{% block content %}
+  <div class="container mb-5">
+      <h3 class="mb-5 text-danger">
+        {{ error_message }}
+      </h3>
+      <form method="post" class="d-flex">{% csrf_token %}
+          {{ form.keyword }}
+          <button class="btn btn-instagram" type="submit"><i class="fas fa-search"></i><span>検索</span></button>
+      </form>
+  </div>
+  <div id="posts_container">
+    {% if posts %}
+      {% for post in posts %}
+    
+        {% if forloop.counter|mod:3 == 1 %}
+          <div class="post-row">
+            <a href="{{ post.permalink }}" class="media-box">
+              <img src="{{ post.media_url }}" class="media">
+              {% if post.like_count and post.comments_count %}
+                <p><i class="fas fa-heart"></i> {{ post.like_count }} &nbsp; <i class="fas fa-comment"></i> {{ post.comments_count }}</p>
+              {% elif post.like_count %}
+                <p><i class="fas fa-heart"></i> {{ post.like_count }}</p>
+              {% elif post.comments_count %}
+                <p><i class="fas fa-comment"></i> {{ post.comments_count }}</p>
+              {% endif %}
+            </a>
+        {% endif %}
+        {% if forloop.counter == posts_length %}
+          </div>
+        {% endif %}
+
+        {% if forloop.counter|mod:3 == 2 %}
+            <a href="{{ post.permalink }}" class="media-box media-center">
+              <img src="{{ post.media_url }}" class="media">
+              {% if post.like_count and post.comments_count %}
+                <p><i class="fas fa-heart"></i> {{ post.like_count }} &nbsp; <i class="fas fa-comment"></i> {{ post.comments_count }}</p>
+              {% elif post.like_count %}
+                <p><i class="fas fa-heart"></i> {{ post.like_count }}</p>
+              {% elif post.comments_count %}
+                <p><i class="fas fa-comment"></i> {{ post.comments_count }}</p>
+              {% endif %}
+            </a>
+        {% endif %}
+        {% if forloop.counter == posts_length %}
+          </div>
+        {% endif %}
+
+        {% if forloop.counter|mod:3 == 0 %}
+            <a href="{{ post.permalink }}" class="media-box">
+              <img src="{{ post.media_url }}" class="media">
+              {% if post.like_count and post.comments_count %}
+                <p><i class="fas fa-heart"></i> {{ post.like_count }} &nbsp; <i class="fas fa-comment"></i> {{ post.comments_count }}</p>
+              {% elif post.like_count %}
+                <p><i class="fas fa-heart"></i> {{ post.like_count }}</p>
+              {% elif post.comments_count %}
+                <p><i class="fas fa-comment"></i> {{ post.comments_count }}</p>
+              {% endif %}
+            </a>
+          </div>
+        {% endif %}
+
+      {% endfor %}
+    {% elif keyword and error_message is None %}
+      <h1>「{{ keyword }}」に一致する記事は見つかりませんでした。</h1>
+    {% endif %}
+  </div>
+{% endblock content %}

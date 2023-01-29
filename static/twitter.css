@@ -1,0 +1,12 @@
+#tweets_container{
+    padding-bottom: 3rem;
+}
+.btn-twitter{
+    background-color: #55acee;
+    color: white;
+}
+.btn-twitter:hover{
+    background-color: #55acee;
+    color: white;
+    filter: brightness(90%);
+}
