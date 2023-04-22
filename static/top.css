@@ -57,6 +57,33 @@
     color: #fff;
     border: none;
 }
+.btn-google{
+    background:white;
+    border-color: gray;
+    border-width: 2px;
+    font-weight: bold;
+    display: table;
+}
+.btn-google:hover{
+    background:white;
+    border-color: gray;
+    border-width: 2px;
+    font-weight: bold;
+    display: table;
+    opacity: 0.7;
+}
+.g-blue{
+    color:#4285f4 ;
+}
+.g-red{
+    color: #ea4335;
+}
+.g-yellow{
+    color: #fbbc05;
+}
+.g-green{
+    color: #34a853;
+}
 .rakuten-travel-green{
     background-color: #45be35;
     color: white;

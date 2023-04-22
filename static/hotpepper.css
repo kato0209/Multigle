@@ -7,6 +7,9 @@
     color: white;
     filter: brightness(90%);
 }
+.text-hotpepper{
+    color:#CC0000 ;
+}
 #shops_container{
     padding-bottom: 5rem;
 }

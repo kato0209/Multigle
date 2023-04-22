@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link href="{% static 'categorize_search_query.css' %}" rel="stylesheet">
+{% endblock head %}
+
+{% block title %}
+自動検索
+{% endblock title %}
+
+{% block content %}
+  <div class="container mb-5">
+      <h3 class="mb-5 text-danger">
+        {{ error_message }}
+      </h3>
+      <form method="post" class="d-flex">{% csrf_token %}
+          {{ form.keyword }}
+          <button class="btn btn-black" type="submit"><i class="fas fa-search"></i><span>検索</span></button>
+      </form>
+  </div>
+{% endblock content %}

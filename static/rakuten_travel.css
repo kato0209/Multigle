@@ -7,6 +7,9 @@
     color: white;
     filter: brightness(90%);
 }
+.text-rakuten-travel{
+    color: #45be35;
+}
 #hotels_container{
     width: 80%;
     font-size: 1.2rem;

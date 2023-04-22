@@ -1,11 +1,16 @@
 from django.shortcuts import render
+from django.urls import reverse
 from django.http import HttpResponse
 import os
 import environ
 from dotenv import load_dotenv
 import requests
+import openai
+from django.middleware.csrf import get_token
+from django.http import HttpResponseRedirect
+from django.http import HttpRequest
 
-from . import forms, twitter, qiita, youtube, instagram, hotpepper, rakuten_travel, rakuten_market, newsapi
+from . import forms, qiita, youtube, instagram, hotpepper, rakuten_travel, rakuten_market, newsapi
 from ML_Project import settings
 
 
@@ -20,6 +25,7 @@ load_dotenv()
 def top(request):
     return render(request, 'top.html')
 
+"""
 def search_on_twitter(request):
     if request.method == 'GET':
         form = forms.SearchForm()
@@ -52,10 +58,65 @@ def search_on_twitter(request):
                 'form' : form,
             }
             return render(request, 'twitter.html', context)
+"""
 
-def search_on_qiita(request):
+def categorize_search_query(request):
     if request.method == 'GET':
         form = forms.SearchForm()
+        return render(request, 'categorize_search_query.html', {'form' : form })
+    elif request.method == 'POST':
+        form = forms.SearchForm(request.POST)
+        keyword = request.POST['keyword']
+        openai.api_key = os.environ['OPENAI_API_KEY']
+        categories = ["Qiita", "YouTube", "Instagram", "Hotpepper", "RakutenTravel", "RakutenMarket", "SportNews"]
+        prompt = (f"Classify '{keyword}' into one of the following categories '{', '.join(categories)}'\ncategory:")
+        try:
+            response = openai.Completion.create(
+                model='text-davinci-003', 
+                prompt=prompt,
+                max_tokens=20,
+            )
+            pred = response['choices'][0]['text']
+            if "Qiita" in pred:
+                url = reverse('qiita', kwargs={'keyword': keyword})
+                return HttpResponseRedirect(url)
+            elif "YouTube" in pred:
+                url = reverse('youtube', kwargs={'keyword': keyword})
+                return HttpResponseRedirect(url)
+            elif "Instagram" in pred:
+                url = reverse('instagram', kwargs={'keyword': keyword})
+                return HttpResponseRedirect(url)
+            elif "Hotpepper" in pred:
+                url = reverse('hotpepper', kwargs={'keyword': keyword})
+                return HttpResponseRedirect(url)
+            elif "RakutenTravel" in pred:
+                url = reverse('RakutenTravel', kwargs={'keyword': keyword})
+                return HttpResponseRedirect(url)
+            elif "RakutenMarket" in pred:
+                url = reverse('RakutenMarket', kwargs={'keyword': keyword})
+                return HttpResponseRedirect(url)
+            elif "SportNews" in pred:
+                url = reverse('newsApi', kwargs={'keyword': keyword})
+                return HttpResponseRedirect(url)
+            else:
+                url = reverse('google')
+                return HttpResponseRedirect(url)
+        except:
+            error_message = 'リクエストにエラーが発生しました'
+            context = {
+                'error_message' : error_message,
+                'keyword' : keyword,
+                'form' : form,
+            }
+            return render(request, 'categorize_search_query.html', context)
+
+def search_on_google(request):
+    if request.method == 'GET':
+        return render(request, 'google.html')
+
+def search_on_qiita(request, keyword=None):
+    if request.method == 'GET':
+        form = forms.SearchForm({'keyword': keyword})
         return render(request, 'qiita.html', {'form' : form })
     elif request.method == 'POST':
         form = forms.SearchForm(request.POST)
@@ -81,9 +142,9 @@ def search_on_qiita(request):
             }
             return render(request, 'qiita.html', context)
 
-def search_on_youtube(request):
+def search_on_youtube(request, keyword=None):
     if request.method == 'GET':
-        form = forms.SearchForm()
+        form = forms.SearchForm({'keyword': keyword})
         return render(request, 'youtube.html', {'form' : form })
     elif request.method == 'POST':
         form = forms.SearchForm(request.POST)
@@ -109,9 +170,9 @@ def search_on_youtube(request):
             }
             return render(request, 'youtube.html', context)
 
-def search_on_instagram(request):
+def search_on_instagram(request, keyword=None):
     if request.method == 'GET':
-        form = forms.SearchForm()
+        form = forms.SearchForm({'keyword': keyword})
         return render(request, 'instagram.html',{'form':form})
     elif request.method == 'POST':
         form = forms.SearchForm(request.POST)
@@ -142,9 +203,9 @@ def search_on_instagram(request):
             }
             return render(request, 'instagram.html', context)
 
-def search_on_hotpepper(request):
+def search_on_hotpepper(request, keyword=None):
     if request.method == 'GET':
-        form = forms.SearchForm()
+        form = forms.SearchForm({'keyword': keyword})
         return render(request, 'hotpepper.html',{'form':form})
     elif request.method == 'POST':
         form = forms.SearchForm(request.POST)
@@ -170,9 +231,9 @@ def search_on_hotpepper(request):
             }
             return render(request, 'hotpepper.html', context)
 
-def search_on_rakuten_travel(request):
+def search_on_rakuten_travel(request, keyword=None):
     if request.method == 'GET':
-        form = forms.SearchForm()
+        form = forms.SearchForm({'keyword': keyword})
         return render(request, 'rakuten_travel.html',{'form':form})
     elif request.method == 'POST':
         form = forms.SearchForm(request.POST)
@@ -202,9 +263,9 @@ def search_on_rakuten_travel(request):
             }
             return render(request, 'rakuten_travel.html', context)
 
-def search_on_rakuten_market(request):
+def search_on_rakuten_market(request, keyword=None):
     if request.method == 'GET':
-        form = forms.SearchForm()
+        form = forms.SearchForm({'keyword': keyword})
         return render(request, 'rakuten_market.html',{'form':form})
     elif request.method == 'POST':
         form = forms.SearchForm(request.POST)
@@ -232,9 +293,9 @@ def search_on_rakuten_market(request):
             }
             return render(request, 'rakuten_market.html', context)
 
-def search_on_newsapi(request):
+def search_on_newsapi(request, keyword=None):
     if request.method == 'GET':
-        form = forms.SearchForm()
+        form = forms.SearchForm({'keyword': keyword})
         return render(request, 'newsapi.html',{'form':form})
     elif request.method == 'POST':
         form = forms.SearchForm(request.POST)

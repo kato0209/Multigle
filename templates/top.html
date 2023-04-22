@@ -13,14 +13,14 @@
 {% block header %}
 <div class="header-container text-center">
   <h1 class="title">
-    <span class='text-primary'>M</span>
-    <span class='text-secondary'>u</span>
-    <span class='text-success'>l</span>
-    <span class='text-danger'>t</span>
-    <span class='text-warning'>i</span>
-    <span class='text-primary'>g</span>
-    <span class='text-success'>l</span>
-    <span class='text-danger'>e</span>
+    <span class='text-primary'>M</span><! --
+--><span class='text-secondary'>u</span><! --
+--><span class='text-success'>l</span><! --
+--><span class='text-danger'>t</span><! --
+--><span class='text-warning'>i</span><! --
+--><span class='text-primary'>g</span><! --
+--><span class='text-success'>l</span><! --
+--><span class='text-danger'>e</span>
   </h1>
   <h4 class="mt-5">プラットフォームを選択してください</h3>
 </div>
@@ -29,8 +29,15 @@
 {% block content %}
 <Main>
   <div class="btn-row">
-    <a href="#" class="btn btn-dark left-button" role="button" aria-pressed="true">自動検索(実装中)</a>
-    <a href="{% url 'twitter' %}" class="btn twitter-blue center-button" role="button" aria-pressed="true">Twitter</a>
+    <a href="{% url 'CategorizeQuery' %}" class="btn btn-dark left-button" role="button" aria-pressed="true">自動検索</a>
+    <a href="{% url 'google' %}" class="btn btn-google center-button" role="button" aria-pressed="true">
+      <span class="g-blue">G</span>
+      <span class="g-red">o</span>
+      <span class="g-yellow">o</span>
+      <span class="g-blue">g</span>
+      <span class="g-green">l</span>
+      <span class="g-red">e</span>
+    </a>
     <a href="{% url 'qiita' %}" class="btn yellow-green right-button" role="button" aria-pressed="true">Qiita</a>
   </div>
   <div class="btn-row">

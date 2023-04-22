@@ -10,6 +10,9 @@
     color: white;
     filter: brightness(90%);
 }
+.text-youtube{
+    color: #DA1725;
+}
 .video-container{
     display: flex;
     margin-top: 2rem;

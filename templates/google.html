@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<script async src="https://cse.google.com/cse.js?cx=60922f3418d3e4ee4">
+</script>
+{% endblock head %}
+
+{% block title %}
+Google検索
+{% endblock title %}
+
+{% block content %}
+<div class="header-container text-center">
+  <h1>
+    <span class='text-primary'>G</span><! --
+  --><span class='text-danger'>o</span><! --
+  --><span class='text-warning'>o</span><! --
+  --><span class='text-primary'>g</span><! --
+  --><span class='text-success'>l</span><! --
+  --><span class='text-danger'>e</span>
+  </h1>
+</div>
+<div class="container">
+  <div class="gcse-search"></div>
+</div>
+{% endblock content %}

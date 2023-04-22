@@ -7,6 +7,9 @@
     color: white;
     filter: brightness(90%);
 }
+.text-rakuten-market{
+    color: #bf0000;
+}
 #items_container{
     display: flex;
     flex-wrap: wrap;

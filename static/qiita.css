@@ -7,6 +7,9 @@
     background-color: #00FF00;
     filter: brightness(90%);
 }
+.text-yellow-green{
+    color: #00FF00;
+}
 .post-container{
     border-bottom: 1px solid gray;
     width: 90%;
