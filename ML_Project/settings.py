@@ -28,11 +28,11 @@ env.read_env(os.path.join(BASE_DIR,'.env'))
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY', default=False)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [env('ALLOWED_HOSTS_IP'), env('ALLOWED_HOSTS_DOMAIN'), 'localhost']
+ALLOWED_HOSTS = [env('ALLOWED_HOSTS_IP', default=False), env('ALLOWED_HOSTS_DOMAIN', default=False), 'localhost']
 
 
 # Application definition
@@ -87,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'multigledb',
         'USER': 'multigle',
-        'PASSWORD': env('DATABASES_PASSWORD'),
+        'PASSWORD': env('DATABASES_PASSWORD',default=False),
         'HOST': '10.0.2.10',
         'PORT': '5432',
     }
@@ -149,11 +149,13 @@ except ImportError:
 #Renderデプロイ用
 RENDER_DEPLOY = True
 if RENDER_DEPLOY:
+    ALLOWED_HOSTS = [env('ALLOWED_HOSTS_DOMAIN', default=False), 'localhost']
     default_dburl = "sqlite:///" + str(BASE_DIR / "db.sqlite3")
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
     DATABASES = {
         "default": config("DATABASE_URL", default=default_dburl, cast=dburl),
     }
-    SUPERUSER_NAME = env("SUPERUSER_NAME")
-    SUPERUSER_EMAIL = env("SUPERUSER_EMAIL")
-    SUPERUSER_PASSWORD = env("SUPERUSER_PASSWORD")
+    SUPERUSER_NAME = env("SUPERUSER_NAME", default=False)
+    SUPERUSER_EMAIL = env("SUPERUSER_EMAIL", default=False)
+    SUPERUSER_PASSWORD = env("SUPERUSER_PASSWORD", default=False)
+    
