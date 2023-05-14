@@ -26,7 +26,7 @@ if RENDER_DEPLOY:
     env.read_env('/etc/secrets/.env')
 else:
     env.read_env(os.path.join(BASE_DIR,'.env'))
-
+print(env('SECRET_KEY', default=False))
 
 
 # Quick-start development settings - unsuitable for production
