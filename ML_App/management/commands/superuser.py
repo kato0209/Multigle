@@ -1,12 +1,15 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
-from ../../../ML_Project import settings
+from django.conf import settings
 
 User = get_user_model()
 
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
+        print(settings.SUPERUSER_NAME)
+        print(settings.SUPERUSER_EMAIL)
+        print(settings.SUPERUSER_PASSWORD)
         if not User.objects.filter(username=settings.SUPERUSER_NAME).exists():
             User.objects.create_superuser(
                 username=settings.SUPERUSER_NAME,
