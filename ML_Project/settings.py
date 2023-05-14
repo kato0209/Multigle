@@ -26,16 +26,16 @@ env = environ.Env()
 #Renderデプロイ用
 if RENDER_DEPLOY:
     env.read_env('/etc/secrets/.env')
-    ALLOWED_HOSTS = [env('ALLOWED_HOSTS_DOMAIN', default=False), 'localhost']
+    ALLOWED_HOSTS = [env('ALLOWED_HOSTS_DOMAIN'), 'localhost']
     default_dburl = "sqlite:///" + str(BASE_DIR / "db.sqlite3")
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
     DATABASES = {
         "default": config("DATABASE_URL", default=default_dburl, cast=dburl),
     }
 
-    SUPERUSER_NAME = env("SUPERUSER_NAME", default=False)
-    SUPERUSER_EMAIL = env("SUPERUSER_EMAIL", default=False)
-    SUPERUSER_PASSWORD = env("SUPERUSER_PASSWORD", default=False)
+    SUPERUSER_NAME = env("SUPERUSER_NAME")
+    SUPERUSER_EMAIL = env("SUPERUSER_EMAIL")
+    SUPERUSER_PASSWORD = env("SUPERUSER_PASSWORD")
 else:
     env.read_env(os.path.join(BASE_DIR,'.env'))
     ALLOWED_HOSTS = [env('ALLOWED_HOSTS_IP'), env('ALLOWED_HOSTS_DOMAIN'), 'localhost']
@@ -44,7 +44,7 @@ else:
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'multigledb',
             'USER': 'multigle',
-            'PASSWORD': env('DATABASES_PASSWORD',default=False),
+            'PASSWORD': env('DATABASES_PASSWORD'),
             'HOST': '10.0.2.10',
             'PORT': '5432',
         }
@@ -59,7 +59,6 @@ else:
 SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-
 
 
 
