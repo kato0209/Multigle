@@ -24,9 +24,10 @@ RENDER_DEPLOY = True
 env = environ.Env()
 if RENDER_DEPLOY:
     env.read_env('/etc/secrets/.env')
+    print(33)
 else:
     env.read_env(os.path.join(BASE_DIR,'.env'))
-print(env('SECRET_KEY', default=False))
+print(env('SECRET_KEY'))
 
 
 # Quick-start development settings - unsuitable for production
