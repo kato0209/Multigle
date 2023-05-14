@@ -22,23 +22,45 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 RENDER_DEPLOY = True
 env = environ.Env()
+
+#Renderデプロイ用
 if RENDER_DEPLOY:
     env.read_env('/etc/secrets/.env')
-    print(33)
+    ALLOWED_HOSTS = [env('ALLOWED_HOSTS_DOMAIN', default=False), 'localhost']
+    default_dburl = "sqlite:///" + str(BASE_DIR / "db.sqlite3")
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    DATABASES = {
+        "default": config("DATABASE_URL", default=default_dburl, cast=dburl),
+    }
+
+    SUPERUSER_NAME = env("SUPERUSER_NAME", default=False)
+    SUPERUSER_EMAIL = env("SUPERUSER_EMAIL", default=False)
+    SUPERUSER_PASSWORD = env("SUPERUSER_PASSWORD", default=False)
 else:
     env.read_env(os.path.join(BASE_DIR,'.env'))
-print(env('SECRET_KEY'))
+    ALLOWED_HOSTS = [env('ALLOWED_HOSTS_IP'), env('ALLOWED_HOSTS_DOMAIN'), 'localhost']
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'multigledb',
+            'USER': 'multigle',
+            'PASSWORD': env('DATABASES_PASSWORD',default=False),
+            'HOST': '10.0.2.10',
+            'PORT': '5432',
+        }
+    }
+
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY', default=False)
+SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [env('ALLOWED_HOSTS_IP', default=False), env('ALLOWED_HOSTS_DOMAIN', default=False), 'localhost']
+
 
 
 # Application definition
@@ -83,21 +105,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ML_Project.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'multigledb',
-        'USER': 'multigle',
-        'PASSWORD': env('DATABASES_PASSWORD',default=False),
-        'HOST': '10.0.2.10',
-        'PORT': '5432',
-    }
-}
 
 
 # Password validation
@@ -151,17 +158,5 @@ try:
 except ImportError:
     pass
 
-
-#Renderデプロイ用
-if RENDER_DEPLOY:
-    ALLOWED_HOSTS = [env('ALLOWED_HOSTS_DOMAIN', default=False), 'localhost']
-    default_dburl = "sqlite:///" + str(BASE_DIR / "db.sqlite3")
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-    DATABASES = {
-        "default": config("DATABASE_URL", default=default_dburl, cast=dburl),
-    }
-
-    SUPERUSER_NAME = env("SUPERUSER_NAME", default=False)
-    SUPERUSER_EMAIL = env("SUPERUSER_EMAIL", default=False)
-    SUPERUSER_PASSWORD = env("SUPERUSER_PASSWORD", default=False)
+    
     
