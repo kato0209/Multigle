@@ -149,13 +149,18 @@ except ImportError:
 #Renderデプロイ用
 RENDER_DEPLOY = True
 if RENDER_DEPLOY:
+    print(1)
     ALLOWED_HOSTS = [env('ALLOWED_HOSTS_DOMAIN', default=False), 'localhost']
     default_dburl = "sqlite:///" + str(BASE_DIR / "db.sqlite3")
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
     DATABASES = {
         "default": config("DATABASE_URL", default=default_dburl, cast=dburl),
     }
+
     SUPERUSER_NAME = env("SUPERUSER_NAME", default=False)
     SUPERUSER_EMAIL = env("SUPERUSER_EMAIL", default=False)
     SUPERUSER_PASSWORD = env("SUPERUSER_PASSWORD", default=False)
+    print(SUPERUSER_NAME)
+    print(SUPERUSER_EMAIL)
+    print(SUPERUSER_PASSWORD)
     
