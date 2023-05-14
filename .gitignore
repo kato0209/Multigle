@@ -5,3 +5,4 @@ local_settings.py
 *.pot
 *.pyc
 __pycache__/
+Multigle_venv/
