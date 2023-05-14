@@ -6,3 +6,5 @@ local_settings.py
 *.pyc
 __pycache__/
 Multigle_venv/
+build.sh
+render.yaml

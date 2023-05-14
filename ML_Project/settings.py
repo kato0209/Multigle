@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 import environ
 from dotenv import load_dotenv
+from decouple import config
+from dj_database_url import parse as dburl
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -53,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # Renderデプロイ用に追加
 ]
 
 ROOT_URLCONF = 'ML_Project.urls'
@@ -142,3 +145,15 @@ try:
 except ImportError:
     pass
 
+
+#Renderデプロイ用
+RENDER_DEPLOY = True
+if RENDER_DEPLOY:
+    default_dburl = "sqlite:///" + str(BASE_DIR / "db.sqlite3")
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    DATABASES = {
+        "default": config("DATABASE_URL", default=default_dburl, cast=dburl),
+    }
+    SUPERUSER_NAME = env("SUPERUSER_NAME")
+    SUPERUSER_EMAIL = env("SUPERUSER_EMAIL")
+    SUPERUSER_PASSWORD = env("SUPERUSER_PASSWORD")
