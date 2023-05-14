@@ -20,9 +20,14 @@ from dj_database_url import parse as dburl
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+RENDER_DEPLOY = True
 env = environ.Env()
-env.read_env(os.path.join(BASE_DIR,'.env'))
+if RENDER_DEPLOY:
+    env.read_env('etc/secrets/.env')
+else:
+    env.read_env(os.path.join(BASE_DIR,'.env'))
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -147,9 +152,7 @@ except ImportError:
 
 
 #Renderデプロイ用
-RENDER_DEPLOY = True
 if RENDER_DEPLOY:
-    print(1)
     ALLOWED_HOSTS = [env('ALLOWED_HOSTS_DOMAIN', default=False), 'localhost']
     default_dburl = "sqlite:///" + str(BASE_DIR / "db.sqlite3")
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
@@ -160,7 +163,4 @@ if RENDER_DEPLOY:
     SUPERUSER_NAME = env("SUPERUSER_NAME", default=False)
     SUPERUSER_EMAIL = env("SUPERUSER_EMAIL", default=False)
     SUPERUSER_PASSWORD = env("SUPERUSER_PASSWORD", default=False)
-    print(SUPERUSER_NAME)
-    print(SUPERUSER_EMAIL)
-    print(SUPERUSER_PASSWORD)
     
