@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 RENDER_DEPLOY = True
 env = environ.Env()
 if RENDER_DEPLOY:
-    env.read_env('etc/secrets/.env')
+    env.read_env('/etc/secrets/.env')
 else:
     env.read_env(os.path.join(BASE_DIR,'.env'))
 
