@@ -14,13 +14,43 @@ from pathlib import Path
 import os
 import environ
 from dotenv import load_dotenv
+from decouple import config
+from dj_database_url import parse as dburl
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+RENDER_DEPLOY = True
 env = environ.Env()
-env.read_env(os.path.join(BASE_DIR,'.env'))
+
+#Renderデプロイ用
+if RENDER_DEPLOY:
+    env.read_env('/etc/secrets/.env')
+    ALLOWED_HOSTS = [env('ALLOWED_HOSTS_DOMAIN'), 'localhost']
+    default_dburl = "sqlite:///" + str(BASE_DIR / "db.sqlite3")
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    DATABASES = {
+        "default": config("DATABASE_URL", default=default_dburl, cast=dburl),
+    }
+
+    SUPERUSER_NAME = env("SUPERUSER_NAME")
+    SUPERUSER_EMAIL = env("SUPERUSER_EMAIL")
+    SUPERUSER_PASSWORD = env("SUPERUSER_PASSWORD")
+else:
+    env.read_env(os.path.join(BASE_DIR,'.env'))
+    ALLOWED_HOSTS = [env('ALLOWED_HOSTS_IP'), env('ALLOWED_HOSTS_DOMAIN'), 'localhost']
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'multigledb',
+            'USER': 'multigle',
+            'PASSWORD': env('DATABASES_PASSWORD'),
+            'HOST': '10.0.2.10',
+            'PORT': '5432',
+        }
+    }
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -30,7 +60,6 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [env('ALLOWED_HOSTS_IP'), env('ALLOWED_HOSTS_DOMAIN'), 'localhost']
 
 
 # Application definition
@@ -53,6 +82,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # Renderデプロイ用に追加
 ]
 
 ROOT_URLCONF = 'ML_Project.urls'
@@ -74,21 +104,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ML_Project.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'multigledb',
-        'USER': 'multigle',
-        'PASSWORD': env('DATABASES_PASSWORD'),
-        'HOST': '10.0.2.10',
-        'PORT': '5432',
-    }
-}
 
 
 # Password validation
@@ -142,3 +157,5 @@ try:
 except ImportError:
     pass
 
+    
+    

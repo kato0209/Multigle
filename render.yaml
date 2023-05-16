@@ -1,0 +1,27 @@
+databases:
+  - name: multigle_render_db
+    region: singapore
+    plan: free
+    databaseName: multigle_render_db
+    user: multigle_render
+
+services:
+  - type: web
+    name: multigle_render
+    env: python
+    region: singapore
+    buildCommand: './build.sh'
+    startCommand: 'gunicorn ML_Project.wsgi:application'
+    plan: free
+    branch: master
+    healthCheckPath: /
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: multigle_render_db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
+    autoDeploy: true
