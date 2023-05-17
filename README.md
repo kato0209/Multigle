@@ -26,8 +26,8 @@ https://multigle-render.onrender.com/
 ●Qiitaが最も適切とAIが判断。
 ![image](https://github.com/kato0209/Multigle/assets/89386373/3ccd8359-5bac-4681-89dd-dc9ffd1b1a4c)
 ●検索
-![image](https://github.com/kato0209/Multigle/assets/89386373/24a8ed14-9d8d-4cee-bf33-18bd7ae40f7f)
+![image](https://github.com/kato0209/Multigle/assets/89386373/7f6cb3df-7bc8-44f4-9d4e-b43ed7e486f8)
 
 
 ### Google検索機能
-![image](https://github.com/kato0209/Multigle/assets/89386373/ce32bc7c-bf53-4de4-8576-ea3bec618e4b)
+![image](https://github.com/kato0209/Multigle/assets/89386373/2586d1fb-2c70-49aa-914c-2b71fed82887)
