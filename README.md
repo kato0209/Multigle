@@ -30,4 +30,4 @@ https://multigle-render.onrender.com/
 
 
 ### Google検索機能
-![image](https://github.com/kato0209/Multigle/assets/89386373/2586d1fb-2c70-49aa-914c-2b71fed82887)
+![image](https://github.com/kato0209/Multigle/assets/89386373/17312d7e-8705-4bd8-abf4-f05dc3bf41f6)
