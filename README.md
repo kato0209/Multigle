@@ -2,7 +2,7 @@
 ●複数のプラットフォームにおける検索機能を一元化するアプリです。<br>
 ●現在は、Qiita, YouTube, Instagram, HOTPEPPERグルメ, 楽天トラベル, 楽天市場, newsapi(スポーツニュース)　の各種プラットフォームにおける検索機能をAPIにより実現します。（サイト内でGoogle検索も可能）<br>
 ●AIを用いたテキスト分類により、検索キーワードから自動的に適切なプラットフォームを判断する機能（自動検索機能）を搭載。<br>
-![image](https://github.com/kato0209/Multigle/assets/89386373/f624e263-3ef9-47d6-a3de-22dcee90ff19)
+![image](https://github.com/kato0209/Multigle/assets/89386373/9b17f5f0-70b4-4601-8733-9653afb96a53)
 
 # URL
 https://multigle-render.onrender.com/ 
@@ -22,12 +22,12 @@ https://multigle-render.onrender.com/
 
 ### 自動検索機能
 ●トップページから自動検索を選び、プログラミングと検索。
-![image](https://github.com/kato0209/Multigle/assets/89386373/5e801c28-cac0-4ebf-8c4e-01c8318b5555)
+![image](https://github.com/kato0209/Multigle/assets/89386373/e9013d74-27db-40fd-bcf5-4e1bc0353fca)
 ●Qiitaが最も適切とAIが判断。
-![image](https://github.com/kato0209/Multigle/assets/89386373/3ccd8359-5bac-4681-89dd-dc9ffd1b1a4c)
+![image](https://github.com/kato0209/Multigle/assets/89386373/0fd89f67-141d-4775-bd02-2506f699dc84)
 ●検索
-![image](https://github.com/kato0209/Multigle/assets/89386373/7f6cb3df-7bc8-44f4-9d4e-b43ed7e486f8)<br><br>
+![image](https://github.com/kato0209/Multigle/assets/89386373/bbbcc921-c468-488d-98e8-24aefb6e6854)<br><br>
 <br><br><br>
 
 ### Google検索機能
-![image](https://github.com/kato0209/Multigle/assets/89386373/17312d7e-8705-4bd8-abf4-f05dc3bf41f6)
+![image](https://github.com/kato0209/Multigle/assets/89386373/4778e43c-f41d-4eeb-9a6f-5742cdee295b)
