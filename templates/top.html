@@ -10,7 +10,8 @@
 {% endblock title %}
 
 
-{% block header %}
+{% block content %}
+
 <div class="header-container text-center">
   <h1 class="title">
     <span class='text-primary'>M</span><! --
@@ -24,9 +25,7 @@
   </h1>
   <h4 class="mt-5">プラットフォームを選択してください</h3>
 </div>
-{% endblock header %}
 
-{% block content %}
 <Main>
   <div class="btn-row">
     <a href="{% url 'CategorizeQuery' %}" class="btn btn-dark left-button" role="button" aria-pressed="true">自動検索</a>

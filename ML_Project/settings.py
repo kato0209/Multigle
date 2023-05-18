@@ -26,7 +26,7 @@ env = environ.Env()
 #Renderデプロイ用
 if RENDER_DEPLOY:
     env.read_env('/etc/secrets/.env')
-    ALLOWED_HOSTS = [env('ALLOWED_HOSTS_DOMAIN'), 'localhost']
+    ALLOWED_HOSTS = [env('ALLOWED_HOSTS_DOMAIN'), '127.0.0.1']
     default_dburl = "sqlite:///" + str(BASE_DIR / "db.sqlite3")
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
     DATABASES = {
@@ -38,7 +38,7 @@ if RENDER_DEPLOY:
     SUPERUSER_PASSWORD = env("SUPERUSER_PASSWORD")
 else:
     env.read_env(os.path.join(BASE_DIR,'.env'))
-    ALLOWED_HOSTS = [env('ALLOWED_HOSTS_IP'), env('ALLOWED_HOSTS_DOMAIN'), 'localhost']
+    ALLOWED_HOSTS = [env('ALLOWED_HOSTS_IP'), env('ALLOWED_HOSTS_DOMAIN'), '127.0.0.1']
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',

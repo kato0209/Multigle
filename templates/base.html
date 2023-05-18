@@ -20,6 +20,11 @@
       </head>
       <body>
         {% block header %}
+        <nav class="navbar bg-secondary sticky-top">
+          <div class="container-fluid">
+            <a href="{% url 'top' %}" class="navbar-brand navbarTextColor">TOPページ</a>
+          </div>
+        </nav>
         {% endblock header %}
 
         {% block content %}

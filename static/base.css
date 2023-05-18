@@ -3,14 +3,22 @@ html{
     font-size: 12px;
 }
 
-body{
-    margin-top: 10%;
-}
-
 .btn{
     white-space: nowrap;
     padding: 0.375rem 0.2rem;
 }
+nav{
+    margin-bottom: 10%;
+}
+
+.navbarTextColor{
+    color: black;
+}
+
+.navbarTextColor:hover{
+    color: #FFFAFA;
+}
+
 @media(max-width: 575px){
   html{
       font-size: 10px;
